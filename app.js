@@ -20,6 +20,11 @@ catch (err) {
 }
 app.use("/api/new-comment", comment_1.CommentRouter);
 app.use("/api/articles-list", article_1.ArticlesRouter);
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://localhost:3500"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 app.use(express_1.default.urlencoded({ extended: false })); // используем промежуточный обрабтчик, который позволяет получать данные из формочек
 app.use((0, cors_1.default)());
 app.use(bodyParser.urlencoded({ extended: false }));
