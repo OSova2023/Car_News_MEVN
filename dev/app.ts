@@ -4,8 +4,8 @@ import { MONGO, PORT } from "./config";
 import { CommentRouter } from "./router/comment";
 import { ArticlesRouter } from "./router/article";
 
-// const cors = require("cors");
-// const bodyParser = require("body-parser");
+import cors from "cors";
+const bodyParser = require("body-parser");
 
 const app = express();
 
@@ -20,12 +20,12 @@ app.use("/api/new-comment", CommentRouter);
 app.use("/api/articles-list", ArticlesRouter);
 
 app.use(express.urlencoded({ extended: false })); // используем промежуточный обрабтчик, который позволяет получать данные из формочек
-// app.use(cors());
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
-  res.status(200).send("server side");
-});
+// app.get("/", (req, res) => {
+//   res.status(200).send("server side");
+// });
 
 app.listen(PORT, () => console.log("Server is listened"));
